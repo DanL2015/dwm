@@ -1,10 +1,11 @@
 --- dwm.c
 +++ dwm.c
-@@ -163,7 +163,6 @@ static void detachstack(Client *c);
- static Monitor *dirtomon(int dir);
- static void drawbar(Monitor *m);
- static void drawbars(void);
--static void enternotify(XEvent *e);
- static void expose(XEvent *e);
- static void focus(Client *c);
- static void focusin(XEvent *e);
+@@ -1891,7 +1867,7 @@ updategeom(void)
+ 					m->clients = c->next;
+ 					detachstack(c);
+ 					c->mon = mons;
+-					attachaside(c);
++					attach(c);
+ 					attachstack(c);
+ 				}
+ 				if (m == selmon)
