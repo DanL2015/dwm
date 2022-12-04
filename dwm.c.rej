@@ -1,31 +1,11 @@
 --- dwm.c
 +++ dwm.c
-@@ -419,6 +420,19 @@ attach(Client *c) {
- }
- 
- void
-+attachabove(Client *c) {
-+	if(c->mon->sel == NULL || c->mon->sel == c->mon->clients || c->mon->sel->isfloating) {
-+		attach(c);
-+		return;
-+	}
-+
-+	Client *at;
-+	for(at = c->mon->clients; at->next != c->mon->sel; at = at->next);
-+	c->next = at->next;
-+	at->next = c;
-+}
-+
-+void
- attachstack(Client *c) {
- 	c->snext = c->mon->stack;
- 	c->mon->stack = c;
-@@ -1901,7 +1915,7 @@ updategeom(void) {
+@@ -1915,7 +1939,7 @@ updategeom(void)
  					m->clients = c->next;
  					detachstack(c);
  					c->mon = mons;
 -					attach(c);
-+					attachabove(c);
++					attachaside(c);
  					attachstack(c);
  				}
- 				if(m == selmon)
+ 				if (m == selmon)
