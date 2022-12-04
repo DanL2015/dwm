@@ -1,0 +1,28 @@
+--- dwm.c
++++ dwm.c
+@@ -290,9 +322,10 @@ static void (*handler[LASTEvent]) (XEvent *) = {
+ 	[MapRequest] = maprequest,
+ 	[MotionNotify] = motionnotify,
+ 	[PropertyNotify] = propertynotify,
++    [ResizeRequest] = resizerequest,
+ 	[UnmapNotify] = unmapnotify
+ };
+-static Atom wmatom[WMLast], netatom[NetLast];
++static Atom wmatom[WMLast], netatom[NetLast], xatom[XLast];
+ static int running = 1;
+ static Cur *cursor[CurLast];
+ static Clr **scheme;
+@@ -1322,6 +1549,13 @@ maprequest(XEvent *e)
+ 	static XWindowAttributes wa;
+ 	XMapRequestEvent *ev = &e->xmaprequest;
+ 
++	Client *i;
++	if ((i = wintosystrayicon(ev->window))) {
++		sendevent(i->win, netatom[Xembed], StructureNotifyMask, CurrentTime, XEMBED_WINDOW_ACTIVATE, 0, systray->win, XEMBED_EMBEDDED_VERSION);
++		resizebarwin(selmon);
++		updatesystray();
++	}
++
+ 	if (!XGetWindowAttributes(dpy, ev->window, &wa))
+ 		return;
+ 	if (wa.override_redirect)
