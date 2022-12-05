@@ -32,11 +32,16 @@ function dat() {
 }
 
 function bat() {
-  printf "^c$black^ ^b$blue0^ "
+  batVal=`cat /sys/class/power_supply/BAT0/capacity`
+  batVal=$(($batVal/5))
+  x=$((22-$batVal))
+  w=$((batVal+2))
+  printf "^c$blue0^^r0,0,100,26^^f5^^c$black^^r0,10,2,4^^r2,6,22,12^^c$blue0^^r3,7,20,10^^c$black^^r%s,7,%s,10^^f28^" "$x" "$w"
   printf "^c$black^ ^b$blue1^ $(cat /sys/class/power_supply/BAT0/capacity)%%"
 }
 
 xfsettingsd &
+killall -q picom; picom &
 killall -q dunst; dunst &
 sh $HOME/.fehbg &
 
