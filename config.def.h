@@ -16,8 +16,8 @@ static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;     /* 0 means no bar */
 static const int topbar             = 1;     /* 0 means bottom bar */
 static const int focusonwheel       = 0;
-static const char *fonts[]          = { "RobotoCondensed:size=12", "material" };
-static const char dmenufont[]       = "RobotoCondensed:size=10";
+static const char *fonts[]          = { "VictorMono Nerd Font Mono:size=12", "material" };
+static const char dmenufont[]       = "VictorMono Nerd Font Mono:size=10";
 static const char col_gray1[]       = "#0f0f0f";
 static const char col_gray2[]       = "#393939";
 static const char col_gray3[]       = "#4c4c4c";
@@ -30,7 +30,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "ﭮ", "阮" };
 
 static const char *tagsel[][2] = {
 	{ col_cyan, col_gray2 },

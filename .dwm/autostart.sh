@@ -11,9 +11,25 @@ red=#ac8a8c
 orange=#c6a679
 purple=#8f8aac
 
+function wifi() {
+  wifi=`nmcli con show --active`
+  if [[ -z "$wifi" ]]; then
+    printf "^c$black^ ^b$blue0^ "
+    printf "^c$black^ ^b$blue1^ No Connection"
+  else
+    printf "^c$black^ ^b$blue0^ "
+    printf "^c$black^ ^b$blue1^ $(iwgetid -r)"
+  fi
+}
+
 function cpu() {
   printf "^c$black^ ^b$blue0^ "
   printf "^c$black^ ^b$blue1^ $(grep -o '^[^ ]*' /proc/loadavg)%%"
+}
+
+function bri() {
+  printf "^c$black^ ^b$blue0^ "
+  printf "^c$black^ ^b$blue1^ $(xbacklight -get)%%"
 }
 
 function vol() {
@@ -36,16 +52,15 @@ function bat() {
   batVal=$(($batVal/5))
   x=$((22-$batVal))
   w=$((batVal+2))
-  printf "^c$blue0^^r0,0,100,26^^f5^^c$black^^r0,10,2,4^^r2,6,22,12^^c$blue0^^r3,7,20,10^^c$black^^r%s,7,%s,10^^f28^" "$x" "$w"
-  printf "^c$black^ ^b$blue1^ $(cat /sys/class/power_supply/BAT0/capacity)%%"
+  printf "^c$blue0^^r0,0,100,26^^f5^^c$black^^r0,10,2,4^^r2,6,22,12^^c$blue0^^r4,8,18,8^^c$black^^r%s,7,%s,10^^f28^" "$x" "$w"
+  printf "^c$black^ ^b$blue1^$(cat /sys/class/power_supply/BAT0/capacity)%%"
 }
 
 xfsettingsd &
-killall -q picom; picom &
 killall -q dunst; dunst &
 sh $HOME/.fehbg &
 
 while true; do
-  xsetroot -name " $(vol) $(cpu) $(mem) $(bat) $(dat) "
+  xsetroot -name " $(wifi) $(vol) $(bat) $(dat) "
   sleep 15
 done
