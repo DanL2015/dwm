@@ -1,6 +1,4 @@
-/* See LICENSE file for copyright and license details. */
-
-/* appearance */
+/* See LICENSE file for copyright and license details. */ /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
@@ -16,8 +14,8 @@ static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;     /* 0 means no bar */
 static const int topbar             = 1;     /* 0 means bottom bar */
 static const int focusonwheel       = 0;
-static const char *fonts[]          = { "Iosevka Nerd Font Mono:size=10", "material" };
-static const char dmenufont[]       = "Iosevka Nerd Font Mono:size=10";
+static const char *fonts[]          = { "Iosevka:size=10", "Iosevka Nerd Font Mono:size=14" };
+static const char dmenufont[]       = "Iosevka:size=10";
 static const char col_gray1[]       = "#0f0f0f";
 static const char col_gray2[]       = "#393939";
 static const char col_gray3[]       = "#4c4c4c";
@@ -30,7 +28,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "ﭮ", "阮" };
+static const char *tags[] = { "", "", "", "󰙯", "" };
 
 static const char *tagsel[][2] = {
 	{ col_cyan, col_gray2 },
@@ -55,7 +53,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-  { "Thunar",   NULL,       NULL,       0,            1,           -1 },
+  //{ "Thunar",   NULL,       NULL,       0,            1,           -1 },
+  { NULL,       NULL,       NULL,       0,            False,       -1 },
 };
 
 /* layout(s) */
