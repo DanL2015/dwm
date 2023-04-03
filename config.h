@@ -20,22 +20,28 @@ static const char col_gray1[]       = "#0f0f0f";
 static const char col_gray2[]       = "#393939";
 static const char col_gray3[]       = "#4c4c4c";
 static const char col_gray4[]       = "#cacaca";
-static const char col_cyan[]        = "#8a98ac";
+static const char col_red[]        = "#ac8a8c";
+static const char col_orange[]        = "#ceb188";
+static const char col_yellow[]        = "#c4c19e";
+static const char col_green[]        = "#93c49f";
+static const char col_cyan[]        = "#93c3c4";
+static const char col_blue[]        = "#a5b4cb";
+static const char col_purple[]        = "#a39ec4";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_gray2,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_gray1,  col_cyan  },
 };
 
 /* tagging */
 static const char *tags[] = { "", "", "", "󰙯", "" };
 
 static const char *tagsel[][2] = {
-	{ col_cyan, col_gray2 },
-	{ col_cyan, col_gray2 },
-	{ col_cyan, col_gray2 },
-	{ col_cyan, col_gray2 },
-	{ col_cyan, col_gray2 },
+	{ col_red, col_gray2 },
+	{ col_yellow, col_gray2 },
+	{ col_green, col_gray2 },
+	{ col_blue, col_gray2 },
+	{ col_purple, col_gray2 },
 	{ col_cyan, col_gray2 },
 	{ col_cyan, col_gray2 },
 	{ col_cyan, col_gray2 },
