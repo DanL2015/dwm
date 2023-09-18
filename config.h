@@ -14,8 +14,8 @@ static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;     /* 0 means no bar */
 static const int topbar             = 1;     /* 0 means bottom bar */
 static const int focusonwheel       = 0;
-static const char *fonts[]          = { "Iosevka:size=10", "Iosevka Nerd Font Mono:size=14" };
-static const char dmenufont[]       = "Iosevka:size=10";
+static const char *fonts[]          = { "Iosevka Nerd Font:size=10", "Iosevka Nerd Font Mono:size=14" };
+static const char dmenufont[]       = "Iosevka Nerd Font:size=10";
 static const char col_gray1[]       = "#0f0f0f";
 static const char col_gray2[]       = "#393939";
 static const char col_gray3[]       = "#4c4c4c";
@@ -34,7 +34,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "󰙯", "" };
+//static const char *tags[] = { "", "", "", "󰙯", "" };
+static const char *tags[] = { "1", "2", "3", "4", "5" };
 
 static const char *tagsel[][2] = {
 	{ col_red, col_gray2 },
