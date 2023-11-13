@@ -1,11 +1,11 @@
 /* See LICENSE file for copyright and license details. */ /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
-static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
+static const unsigned int gappih    = 4;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 4;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 4;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 4;       /* vert outer gap between windows and screen edge */
+static const int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -14,23 +14,21 @@ static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;     /* 0 means no bar */
 static const int topbar             = 1;     /* 0 means bottom bar */
 static const int focusonwheel       = 0;
-static const char *fonts[]          = { "Iosevka Nerd Font:size=10", "Iosevka Nerd Font Mono:size=14" };
-static const char dmenufont[]       = "Iosevka Nerd Font:size=10";
-static const char col_gray1[]       = "#0f0f0f";
-static const char col_gray2[]       = "#393939";
-static const char col_gray3[]       = "#4c4c4c";
-static const char col_gray4[]       = "#cacaca";
-static const char col_red[]        = "#ac8a8c";
-static const char col_orange[]        = "#ceb188";
-static const char col_yellow[]        = "#c4c19e";
-static const char col_green[]        = "#93c49f";
-static const char col_cyan[]        = "#93c3c4";
-static const char col_blue[]        = "#a5b4cb";
-static const char col_purple[]        = "#a39ec4";
+static const char *fonts[]          = { "monospace:size=10" };
+static const char dmenufont[]       = "monospace:size=10";
+static const char col_gray1[]       = "#1d1f21";
+static const char col_gray2[]       = "#969896";
+static const char col_gray3[]       = "#c5c8c6";
+static const char col_gray4[]       = "#ffffff";
+static const char col_red[]        = "#cc342b";
+static const char col_yellow[]        = "#fba922";
+static const char col_green[]        = "#198844";
+static const char col_blue[]        = "#3971ed";
+static const char col_purple[]        = "#a36ac7";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_gray1,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_gray1,  col_yellow  },
 };
 
 /* tagging */
@@ -38,15 +36,15 @@ static const char *colors[][3]      = {
 static const char *tags[] = { "1", "2", "3", "4", "5" };
 
 static const char *tagsel[][2] = {
-	{ col_red, col_gray2 },
-	{ col_yellow, col_gray2 },
-	{ col_green, col_gray2 },
-	{ col_blue, col_gray2 },
-	{ col_purple, col_gray2 },
-	{ col_cyan, col_gray2 },
-	{ col_cyan, col_gray2 },
-	{ col_cyan, col_gray2 },
-	{ col_cyan, col_gray2 },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
 };
 
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
@@ -60,7 +58,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-  //{ "Thunar",   NULL,       NULL,       0,            1,           -1 },
+  //{ "Nemo",   NULL,       NULL,       0,            1,           -1 },
   { NULL,       NULL,       NULL,       0,            False,       -1 },
 };
 
