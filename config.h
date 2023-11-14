@@ -12,10 +12,10 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;     /* 0 means no bar */
-static const int topbar             = 1;     /* 0 means bottom bar */
+static const int topbar             = 0;     /* 0 means bottom bar */
 static const int focusonwheel       = 0;
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "monospace:pixelsize=10" };
+static const char dmenufont[]       = "monospace:pixelsize=10";
 static const char col_gray1[]       = "#1d1f21";
 static const char col_gray2[]       = "#969896";
 static const char col_gray3[]       = "#c5c8c6";
@@ -47,8 +47,8 @@ static const char *tagsel[][2] = {
 	{ col_gray1, col_yellow },
 };
 
-static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
+static const unsigned int ulinepad	= 0;	/* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke	= 0;	/* thickness / height of the underline */
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
@@ -58,8 +58,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-  //{ "Nemo",   NULL,       NULL,       0,            1,           -1 },
-  { NULL,       NULL,       NULL,       0,            False,       -1 },
+  { "Nemo",   	NULL,       NULL,       0,            1,           -1 },
+  //{ NULL,       NULL,       NULL,       0,            False,       -1 },
 };
 
 /* layout(s) */
@@ -91,10 +91,10 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray2, "-sb", col_yellow, "-sf", col_gray1, "-p", "SEARCH:", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *screenshotcmd[] = { "sh", "-c", "maim -s | xclip -selection clipboard -t image/png", NULL};
-static const char *lockscreencmd[] = { "sh", "-c", "~/.config/i3lock-color/lock.sh", NULL};
+static const char *lockscreencmd[] = { "slock", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
