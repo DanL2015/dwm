@@ -1,3 +1,4 @@
+#include <X11/XF86keysym.h>
 /* See LICENSE file for copyright and license details. */ /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -14,8 +15,8 @@ static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;     /* 0 means no bar */
 static const int topbar             = 0;     /* 0 means bottom bar */
 static const int focusonwheel       = 0;
-static const char *fonts[]          = { "monospace:pixelsize=10" };
-static const char dmenufont[]       = "monospace:pixelsize=10";
+static const char *fonts[]          = { "Cozette:pixelsize=12" };
+static const char dmenufont[]       = "Cozette:pixelsize=12";
 static const char col_gray1[]       = "#1d1f21";
 static const char col_gray2[]       = "#969896";
 static const char col_gray3[]       = "#c5c8c6";
@@ -28,17 +29,23 @@ static const char col_purple[]        = "#a36ac7";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_gray1,  col_yellow  },
+	[SchemeSel]  = { col_gray1, col_yellow,  col_yellow  },
 };
 
 /* tagging */
 //static const char *tags[] = { "", "", "", "󰙯", "" };
-static const char *tags[] = { "1", "2", "3", "4", "5" };
+static const char *tags[] = { "001", "010", "011", "100", "101", "110", "111" };
+static const char *alttags[] = { "[001]", "[010]", "[011]", "[100]", "[101]", "[110]", "[111]" };
 
-static const unsigned int ulinepad	= 0;	/* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke	= 0;	/* thickness / height of the underline */
-static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
-static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
+static const char *tagsel[][2] = {
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+	{ col_gray1, col_yellow },
+};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -84,12 +91,26 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *screenshotcmd[] = { "sh", "-c", "maim -s | xclip -selection clipboard -t image/png", NULL};
 static const char *lockscreencmd[] = { "slock", NULL};
 
+/* Volume commands */
+static const char *upvol[] = { "pamixer", "-i", "5", NULL };
+static const char *downvol[] = { "pamixer", "-d", "5", NULL };
+static const char *mutevol[] = { "pamixer", "-t", NULL };
+
+/*Brightness commands*/
+static const char *upbri[] = { "xbacklight", "-inc", "5", NULL };
+static const char *downbri[] = { "xbacklight", "-dec", "5", NULL };
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-  { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshotcmd } },
-  { MODKEY|Mod1Mask,              XK_x,      spawn,          {.v = lockscreencmd } },
+  	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshotcmd } },
+  	{ MODKEY|Mod1Mask,              XK_x,      spawn,          {.v = lockscreencmd } },
+	{ 0,                       	XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+	{ 0,                       	XF86XK_AudioMute, spawn, {.v = mutevol } },
+	{ 0,                       	XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+	{ 0,				XF86XK_MonBrightnessUp,		spawn,	{.v = upbri} },
+	{ 0,				XF86XK_MonBrightnessDown,	spawn,	{.v = downbri} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
