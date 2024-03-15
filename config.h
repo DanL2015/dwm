@@ -9,7 +9,7 @@ static const unsigned int gappoh =
 static const unsigned int gappov =
     4; /* vert outer gap between windows and screen edge */
 static const int smartgaps =
-    1; /* 1 means no outer gap when there is only one window */
+    0; /* 1 means no outer gap when there is only one window */
 static const unsigned int systraypinning =
     0; /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor
           X */
@@ -21,24 +21,24 @@ static const int systraypinningfailfirst =
           display systray on the last monitor*/
 static const int showsystray = 1; /* 0 means no systray */
 static const int showbar = 1;     /* 0 means no bar */
-static const int topbar = 0;      /* 0 means bottom bar */
+static const int topbar = 1;      /* 0 means bottom bar */
 static const int focusonwheel = 0;
-static const char *fonts[] = {"Cozette:pixelsize=12"};
-static const char dmenufont[] = "Cozette:pixelsize=12";
-static const char col_gray1[] = "#0d1117";
-static const char col_gray2[] = "#89928b";
-static const char col_gray3[] = "#c6cdd5";
-static const char col_gray4[] = "#ecf2f8";
-static const char col_red[] = "#fa7970";
-static const char col_orange[] = "#faa356";
-static const char col_green[] = "#7ce38b";
-static const char col_cyan[] = "#a2d2fb";
-static const char col_blue[] = "#77bdfb";
-static const char col_purple[] = "#cea5fb";
+static const char *fonts[] = {"Iosevka NFM Medium:pixelsize=13"};
+static const char dmenufont[] = "Iosevka NFM Medium:pixelsize=13";
+static const char col_gray1[] = "#020203";
+static const char col_gray2[] = "#1c252c";
+static const char col_gray3[] = "#b6beca";
+static const char col_gray4[] = "#e3e6eb";
+static const char col_red[] = "#e05f65";
+static const char col_orange[] = "#f1cf8a";
+static const char col_green[] = "#78dba9";
+static const char col_cyan[] = "#74bee9";
+static const char col_blue[] = "#70a5eb";
+static const char col_purple[] = "#c68aee";
 static const char *colors[][3] = {
     /*               fg         bg         border   */
-    [SchemeNorm] = {col_cyan, col_gray1, col_gray2},
-    [SchemeSel] = {col_gray1, col_cyan, col_cyan},
+    [SchemeNorm] = {col_gray4, col_gray1, col_gray1},
+    [SchemeSel] = {col_gray1, col_blue, col_blue},
 };
 
 /* tagging */
@@ -48,9 +48,9 @@ static const char *alttags[] = {"[001]", "[010]", "[011]", "[100]",
                                 "[101]", "[110]", "[111]"};
 
 static const char *tagsel[][2] = {
-    {col_gray1, col_cyan}, {col_gray1, col_cyan}, {col_gray1, col_cyan},
-    {col_gray1, col_cyan}, {col_gray1, col_cyan}, {col_gray1, col_cyan},
-    {col_gray1, col_cyan},
+    {col_gray1, col_blue}, {col_gray1, col_blue}, {col_gray1, col_blue},
+    {col_gray1, col_blue}, {col_gray1, col_blue}, {col_gray1, col_blue},
+    {col_gray1, col_blue},
 };
 
 static const Rule rules[] = {
@@ -60,6 +60,7 @@ static const Rule rules[] = {
      */
     /* class      instance    title       tags mask     isfloating   monitor */
     {"Nemo", NULL, NULL, 0, 1, -1},
+    {"CEmu | Calculator", NULL, NULL, 0, 1, -1},
     //{ NULL,       NULL,       NULL,       0,            False,       -1 },
 };
 
@@ -98,10 +99,10 @@ static char dmenumon[2] =
     "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {
     "dmenu_run", "-m",  dmenumon,   "-fn", dmenufont, "-nb", col_gray1, "-nf",
-    col_gray2,   "-sb", col_cyan, "-sf", col_gray1, "-p",  "SEARCH:", NULL};
-static const char *termcmd[] = {"st", NULL};
+    col_gray3,   "-sb", col_blue, "-sf", col_gray1, "-p",  "SEARCH:", NULL};
+static const char *termcmd[] = {"wezterm", NULL};
 static const char *screenshotcmd[] = {
-    "sh", "-c", "maim -s | xclip -selection clipboard -t image/png", NULL};
+    "screenshot", "area", NULL};
 static const char *lockscreencmd[] = {"slock", NULL};
 
 /* Volume commands */
@@ -129,8 +130,8 @@ static const Key keys[] = {
     {MODKEY, XK_k, focusstack, {.i = -1}},
     {MODKEY, XK_i, incnmaster, {.i = +1}},
     {MODKEY, XK_d, incnmaster, {.i = -1}},
-    {MODKEY, XK_h, setmfact, {.f = -0.05}},
-    {MODKEY, XK_l, setmfact, {.f = +0.05}},
+    {MODKEY, XK_h, setmfact, {.f = -0.01}},
+    {MODKEY, XK_l, setmfact, {.f = +0.01}},
     {MODKEY | Mod1Mask, XK_h, incrgaps, {.i = +1}},
     {MODKEY | Mod1Mask, XK_l, incrgaps, {.i = -1}},
     {MODKEY | Mod1Mask | ShiftMask, XK_h, incrogaps, {.i = +1}},
@@ -159,10 +160,10 @@ static const Key keys[] = {
     {MODKEY | ShiftMask, XK_space, togglefloating, {0}},
     {MODKEY, XK_0, view, {.ui = ~0}},
     {MODKEY | ShiftMask, XK_0, tag, {.ui = ~0}},
-    {MODKEY, XK_Left, focusmon, {.i = -1}},
-    {MODKEY, XK_Right, focusmon, {.i = +1}},
-    {MODKEY | ShiftMask, XK_Left, tagmon, {.i = -1}},
-    {MODKEY | ShiftMask, XK_Right, tagmon, {.i = +1}},
+    {MODKEY, XK_Left, focusmon, {.i = +1}},
+    {MODKEY, XK_Right, focusmon, {.i = -1}},
+    {MODKEY | ShiftMask, XK_Left, tagmon, {.i = +1}},
+    {MODKEY | ShiftMask, XK_Right, tagmon, {.i = -1}},
     TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
         TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
             TAGKEYS(XK_9, 8){MODKEY | ShiftMask, XK_q, quit, {0}},
