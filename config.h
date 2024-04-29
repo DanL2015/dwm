@@ -2,7 +2,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 4;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 4;       /* vert inner gap between windows */
@@ -38,11 +38,11 @@ static const char *colors[][3]      = {
 
 /* tagging */
 static const char *tags[] = {"", "", "", "", ""};
-static const char *alttags[] = { "[]", "[]", "[]", "[]", "[]" };
+static const char *alttags[] = { "", "", "", "", "" };
 
-static const unsigned int ulinepad	= 10;	/* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke	= 1;	/* thickness / height of the underline */
-static const unsigned int ulinevoffset	= 3;	/* how far above the bottom of the bar the line should appear */
+static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
+static const unsigned int ulinevoffset	= 1;	/* how far above the bottom of the bar the line should appear */
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
@@ -81,7 +81,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m",  dmenumon,   "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3,   "-sb", col_blue, "-sf", col_gray1, "-p",  "SEARCH:", NULL};
+static const char *dmenucmd[] = { "dmenu_run", "-m",  dmenumon,   "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3,   "-sb", col_blue, "-sf", col_gray1, "-p",  "Search:", NULL};
 static const char *termcmd[]  = { "wezterm", NULL };
 static const char *screenshotcmd[] = {
     "screenshot", "area", NULL};
