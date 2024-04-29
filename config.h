@@ -2,7 +2,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 4;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 4;       /* vert inner gap between windows */
@@ -16,12 +16,13 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;     /* 0 means no bar */
 static const int topbar             = 1;     /* 0 means bottom bar */
+static const unsigned int colorfultag = 1; /* 0 means use SchemeSel for selected tag */
 static const int focusonwheel       = 0;
 static const char *fonts[]          = { "Iosevka Term:size=12:style=Regular", "Material\\-Design\\-Iconic\\-Font:style=Design-Iconic-Font" };
 static const char dmenufont[]       = "Iosevka Term:size=12";
 static const char col_gray1[] = "#020203";
 static const char col_gray2[] = "#1c252c";
-static const char col_gray3[] = "#b6beca";
+static const char col_gray3[] = "#6b7078";
 static const char col_gray4[] = "#e3e6eb";
 static const char col_red[] = "#e05f65";
 static const char col_orange[] = "#f1cf8a";
@@ -32,17 +33,26 @@ static const char col_purple[] = "#c68aee";
 static const char col_borderbar[] = "#020203";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray4, col_gray1, col_gray1 },
+	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
 	[SchemeSel]  = { col_blue, col_gray1,  col_blue  },
+  [SchemeTag]        = { col_gray3, col_gray1, col_gray1 },
+  [SchemeTag1]       = { col_red, col_gray1,  col_gray1 },
+  [SchemeTag2]       = { col_orange, col_gray1,  col_gray1 },
+  [SchemeTag3]       = { col_green, col_gray1,  col_gray1 },
+  [SchemeTag4]       = { col_blue, col_gray1,  col_gray1 },
+  [SchemeTag5]       = { col_purple, col_gray1,  col_gray1 },
 };
 
 /* tagging */
 static const char *tags[] = {"", "", "", "", ""};
 static const char *alttags[] = { "", "", "", "", "" };
+static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3,
+                                  SchemeTag4, SchemeTag5
+                                };
 
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
-static const unsigned int ulinevoffset	= 1;	/* how far above the bottom of the bar the line should appear */
+static const unsigned int ulinevoffset	= 2;	/* how far above the bottom of the bar the line should appear */
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
@@ -81,7 +91,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m",  dmenumon,   "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3,   "-sb", col_blue, "-sf", col_gray1, "-p",  "Search:", NULL};
+static const char *dmenucmd[] = { "dmenu_run", "-m",  dmenumon,   "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3,   "-sb", col_gray1, "-sf", col_blue, "-p",  "Search:", NULL};
 static const char *termcmd[]  = { "wezterm", NULL };
 static const char *screenshotcmd[] = {
     "screenshot", "area", NULL};
