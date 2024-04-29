@@ -1,5 +1,5 @@
 # Lightweight DWM
-
+For personal lightweight use at school.
 ![Screenshot](./screenshots/screenshot.png)
 
 ## Patches
