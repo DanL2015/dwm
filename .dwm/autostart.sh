@@ -20,7 +20,7 @@ function media() {
 	if [[ -z "$status" ]]; then
 		printf "^c$black^^b$blue^ ${icon} ^d^%s""^c$white^^b$gray^ No Players ^b$black^"
 	else
-		metadata=`playerctl metadata --format '{{artist}} - {{title}}' | sed 's/\(.\{25\}\).*/\1.../'`
+		metadata=`playerctl metadata --format '{{artist}} • {{title}}' | sed 's/\(.\{25\}\).*/\1.../'`
 		printf "^c$black^^b$blue^ ${icon} ^d^%s""^c$white^^b$gray^ ${metadata} ^b$black^"
 	fi
 }
@@ -56,7 +56,7 @@ function mem() {
 }
 
 function dat() {
-  printf "^c$black^^b$cyan^  ^d^%s""^c$cyan^^b$gray^ $(date '+%b %d, %I:%M %p') ^b$black^"
+  printf "^c$black^^b$cyan^  ^d^%s""^c$white^^b$gray^ $(date '+%b %d, %I:%M %p') ^b$black^"
 }
 
 function bat() {
@@ -71,6 +71,7 @@ function bat() {
 ~/.fehbg &
 dunst &
 xfsettingsd &
+picom &
 
 while true; do
   xsetroot -name " $(vol) $(bri)  $(bat) $(media) $(wifi) $(dat)"
