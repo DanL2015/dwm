@@ -875,13 +875,13 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 	text = p;
 
 	w += 2; /* 1px padding on both sides */
-	ret = m->ww - w - borderpx;
+	ret = m->ww - w - barpadding;
 	x = m->ww - w - getsystraywidth();
 
 	drw_setscheme(drw, scheme[LENGTH(colors)]);
 	drw->scheme[ColFg] = scheme[SchemeNorm][ColFg];
 	drw->scheme[ColBg] = scheme[SchemeNorm][ColBg];
-	drw_rect(drw, x, borderpx, w, bh, 1, 1);
+	drw_rect(drw, x, barpadding, w, bh, 1, 1);
 	x++;
 
 	/* process status text */
@@ -892,7 +892,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 
 			text[i] = '\0';
 			w = TEXTW(text) - lrpad;
-			drw_text(drw, x, borderpx, w, bh, 0, text, 0);
+			drw_text(drw, x, barpadding, w, bh, 0, text, 0);
 
 			x += w;
 
@@ -922,7 +922,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 					while (text[++i] != ',');
 					int rh = atoi(text + ++i);
 
-					drw_rect(drw, rx + x, ry + borderpx, rw, rh, 1, 0);
+					drw_rect(drw, rx + x, ry + barpadding, rw, rh, 1, 0);
 				} else if (text[i] == 'f') {
 					x += atoi(text + ++i);
 				}
@@ -936,7 +936,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 
 	if (!isCode) {
 		w = TEXTW(text) - lrpad;
-		drw_text(drw, x, borderpx, w, bh, 0, text, 0);
+		drw_text(drw, x, barpadding, w, bh, 0, text, 0);
 	}
 
 	drw_setscheme(drw, scheme[SchemeNorm]);
@@ -948,9 +948,9 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 void
 drawbar(Monitor *m)
 {
-	int x, y = borderpx, w, tw = 0, stw = 0;
-	int th = bh - borderpx * 2;
-	int mw = m->ww - borderpx * 2;
+	int x, y = barpadding, w, tw = 0, stw = 0;
+	int th = bh - barpadding * 2;
+	int mw = m->ww - barpadding * 2;
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
@@ -977,13 +977,13 @@ drawbar(Monitor *m)
 		if (c->isurgent)
 			urg |= c->tags;
 	}
-	x = borderpx;
+	x = barpadding;
 	for (i = 0; i < LENGTH(tags); i++) {
 		tagtext = occ & 1 << i ? alttags[i] : tags[i];
 		w = TEXTW(tagtext);
     drw_setscheme(drw, scheme[occ & 1 << i ? (m->colorfultag ? tagschemes[i] : SchemeSel) : SchemeTag]);
-		drw_text(drw, x, y, w, bh, lrpad / 2, tagtext, urg & 1 << i);
-		if (ulineall || m->tagset[m->seltags] & 1 << i) /* if there are conflicts, just move these lines directly underneath both 'drw_setscheme' and 'drw_text' :) */
+		drw_text(drw, x + barpadding, y, w - 2 * barpadding, bh - 2 * barpadding, lrpad / 2 - barpadding, tagtext, urg & 1 << i);
+		if (ulineall || m->tagset[m->seltags] & 1 << i)
 			drw_rect(drw, x + ulinepad, bh - ulinestroke - ulinevoffset, w - (ulinepad * 2), ulinestroke, 1, 0);
 		x += w;
 	}
@@ -1989,7 +1989,7 @@ setup(void)
 	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
 		die("no fonts could be loaded.");
 	lrpad = drw->fonts->h;
-	bh = drw->fonts->h + 2 + borderpx * 2;
+	bh = drw->fonts->h + 2 + barpadding * 2;
 	updategeom();
 	/* init atoms */
 	utf8string = XInternAtom(dpy, "UTF8_STRING", False);

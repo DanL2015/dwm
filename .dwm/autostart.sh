@@ -5,7 +5,8 @@ white=#e3e6eb
 red=#e05f65
 orange=#f1cf8a
 green=#78dba9
-cyan=#74bee9
+cyan0=#74bee9
+cyan1=#69add4
 blue=#70a5eb
 purple=#c68aee
 
@@ -28,9 +29,9 @@ function media() {
 function wifi() {
   wifi=`nmcli -t -f active,ssid dev wifi | grep -E '^yes' | cut -d\' -f2 | cut -b 5-`
   if [[ -z "$wifi" ]]; then
-	  printf "^c$black^^b$purple^  ^d^%s""^c$white^^b$gray^ Disconnected ^b$black^"
+	  printf "^c$black^^b$purple^  ^d^%s""^c$white^^b$gray^ Disconnected ^b$black^"
   else
-	  printf "^c$black^^b$purple^  ^d^%s""^c$white^^b$gray^ ${wifi} ^b$black^"
+	  printf "^c$black^^b$purple^  ^d^%s""^c$white^^b$gray^ ${wifi} ^b$black^"
   fi
 }
 
@@ -39,13 +40,13 @@ function cpu() {
 }
 
 function bri() {
-  printf "^c$red^  $(xbacklight -get)%% "
+  printf "^c$red^  $(xbacklight -get)%% "
 }
 
 function vol() {
   mute=`pamixer --get-mute`
   if [[ "$mute" == "true" ]]; then
-    printf "^c$blue^  Muted"
+    printf "^c$blue^  Muted "
   else
     printf "^c$blue^  $(pamixer --get-volume)%% "
   fi
@@ -56,7 +57,7 @@ function mem() {
 }
 
 function dat() {
-  printf "^c$black^^b$cyan^  ^d^%s""^c$white^^b$gray^ $(date '+%b %d, %I:%M %p') ^b$black^"
+  printf "^c$black^^b$cyan0^  ^d^%s""^c$black^^b$cyan1^ $(date '+%b %d, %I:%M %p') ^b$black^"
 }
 
 function bat() {
@@ -65,7 +66,7 @@ function bat() {
   if [[ "$bat" == "Charging" || "$bat" == "Full" ]]; then
     icon=""
   fi
-  printf "^c$green^${icon} $(cat /sys/class/power_supply/BAT0/capacity)%% "
+  printf " ^c$green^${icon} $(cat /sys/class/power_supply/BAT0/capacity)%% "
 }
 
 ~/.fehbg &
@@ -74,6 +75,6 @@ xfsettingsd &
 picom &
 
 while true; do
-  xsetroot -name " $(vol) $(bri)  $(bat) $(media) $(wifi) $(dat)"
+  xsetroot -name " $(bat) $(vol) $(bri) $(media) $(wifi) $(dat)"
   sleep 5
 done
