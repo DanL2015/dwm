@@ -982,7 +982,7 @@ drawbar(Monitor *m)
 		tagtext = occ & 1 << i ? alttags[i] : tags[i];
 		w = TEXTW(tagtext);
     drw_setscheme(drw, scheme[occ & 1 << i ? (m->colorfultag ? tagschemes[i] : SchemeSel) : SchemeTag]);
-		drw_text(drw, x + barpadding, y, w - 2 * barpadding, bh - 2 * barpadding, lrpad / 2 - barpadding, tagtext, urg & 1 << i);
+		drw_text(drw, x + barpadding, y, w - 2 * barpadding, bh - 2 * barpadding, barpadding, tagtext, urg & 1 << i);
 		if (ulineall || m->tagset[m->seltags] & 1 << i)
 			drw_rect(drw, x + ulinepad, bh - ulinestroke - ulinevoffset, w - (ulinepad * 2), ulinestroke, 1, 0);
 		x += w;

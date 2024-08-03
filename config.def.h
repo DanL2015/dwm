@@ -3,8 +3,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int barpadding = 6;
-static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int barpadding = 6; static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 8;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 8;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 8;       /* horiz outer gap between windows and screen edge */
@@ -37,12 +36,12 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_cyan, col_gray1, col_gray1 },
 	[SchemeSel]  = { col_blue, col_gray1,  col_blue  },
-  [SchemeTag]        = { col_gray3, col_gray1, col_gray1 },
-  [SchemeTag1]       = { col_blue, col_gray1,  col_gray1 },
-  [SchemeTag2]       = { col_red, col_gray1,  col_gray1 },
-  [SchemeTag3]       = { col_orange, col_gray1,  col_gray1 },
-  [SchemeTag4]       = { col_green, col_gray1,  col_gray1 },
-  [SchemeTag5]       = { col_cyan, col_gray1,  col_gray1 },
+  [SchemeTag]        = { col_gray3, col_gray1, col_gray3 },
+  [SchemeTag1]       = { col_gray1, col_blue,  col_gray3 },
+  [SchemeTag2]       = { col_gray1, col_red,  col_gray3 },
+  [SchemeTag3]       = { col_gray1, col_orange,  col_gray3 },
+  [SchemeTag4]       = { col_gray1, col_green,  col_gray3 },
+  [SchemeTag5]       = { col_gray1, col_cyan,  col_gray3 },
 };
 
 /* tagging */
