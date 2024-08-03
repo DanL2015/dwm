@@ -14,3 +14,4 @@ For personal lightweight use at school.
 - Systray Icon Size
 - Underline Tags
 - Vanity Gaps
+- Win Icons
