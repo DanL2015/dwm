@@ -959,6 +959,7 @@ drawbar(Monitor *m)
 	int mw = m->ww - barpadding * 2;
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
+  int maxtagw = 0;
 	unsigned int i, occ = 0, urg = 0;
 	const char *tagtext;
 	Client *c;
@@ -983,16 +984,24 @@ drawbar(Monitor *m)
 		if (c->isurgent)
 			urg |= c->tags;
 	}
-	x = barpadding;
+	x = barpadding / 2;
+
+  for (i = 0; i<LENGTH(tags); i++) {
+		tagtext = occ & 1 << i ? alttags[i] : tags[i];
+    maxtagw = MAX(maxtagw, TEXTW(tagtext));
+  }
+
 	for (i = 0; i < LENGTH(tags); i++) {
 		tagtext = occ & 1 << i ? alttags[i] : tags[i];
 		w = TEXTW(tagtext);
     drw_setscheme(drw, scheme[occ & 1 << i ? (m->colorfultag ? tagschemes[i] : SchemeSel) : SchemeTag]);
-		drw_text(drw, x + barpadding, y, w - 2 * barpadding, bh - 2 * barpadding, barpadding, tagtext, urg & 1 << i);
+		drw_text(drw, x + barpadding, y, maxtagw - 2 * barpadding, bh - 2 * barpadding, (maxtagw - w)/2 + barpadding, tagtext, urg & 1 << i);
+    drw_setscheme(drw, scheme[SchemeSel]);
 		if (ulineall || m->tagset[m->seltags] & 1 << i)
-			drw_rect(drw, x + ulinepad, bh - ulinestroke - ulinevoffset, w - (ulinepad * 2), ulinestroke, 1, 0);
-		x += w;
+			drw_rect(drw, x + ulinepad, bh - ulinestroke - ulinevoffset, maxtagw - (ulinepad * 2), ulinestroke, 1, 0);
+		x += (maxtagw - barpadding);
 	}
+  x += barpadding;
 	w = TEXTW(m->ltsymbol);
 	drw_setscheme(drw, scheme[SchemeLayout]);
 	x = drw_text(drw, x, y, w, th, lrpad / 2, m->ltsymbol, 0);
@@ -1000,7 +1009,6 @@ drawbar(Monitor *m)
 	if ((w = mw - tw - stw - x) > th) {
 		if (m->sel) {
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-			// drw_text(drw, x, y, w, th, lrpad / 2, m->sel->name, 0);
 			drw_text(drw, x, y, w, th, lrpad / 2 + (m->sel->icon ? m->sel->icw + ICONSPACING : 0), m->sel->name, 0);
 			if (m->sel->icon) drw_pic(drw, x + lrpad / 2, (th - m->sel->ich) / 2 + barpadding, m->sel->icw, m->sel->ich, m->sel->icon);
 			if (m->sel->isfloating)
